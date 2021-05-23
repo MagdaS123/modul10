@@ -1,7 +1,7 @@
 import unittest
 from selenium import webdriver
 from config.test_settings import TestSettings
-from tests.page_objects import main_page, cart_page, order_page, assert_page
+from tests.page_objects import main_page, cart_page, order_page, assert_page, search_page, shop_page
 
 
 class Tests(unittest.TestCase):
@@ -23,6 +23,16 @@ class Tests(unittest.TestCase):
         order_page.proper_fill_all_form_areas(self.driver)
         self.assertTrue(order_page.submit_order(self.driver))
         self.assertTrue(assert_page.text_visible(self.driver))
+
+    def test2_field_search(self):
+        self.assertTrue(search_page.field_search_visible(self.driver))
+        search_page.find_item(self.driver)
+        self.assertTrue(search_page.item_is_find(self.driver))
+
+
+    def test3_shop_page(self):
+        shop_page.click_shop_tab(self.driver)
+        shop_page.sort_asc(self.driver)
 
 
 if __name__ == '__main__':
